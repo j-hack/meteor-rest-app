@@ -1,22 +1,30 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.Bookmarks.helpers({
+  bookmarks: [
+    {
+      url: 'http://www.meteor.com/',
+      title: 'Meteor',
+    },
+    {
+      url: 'https://guide.meteor.com/',
+      title: 'Meteor Guide',
+    },
+    {
+      url: 'http://docs.meteor.com/',
+      title: 'Meteor API Docs',
+    },
+    {
+      url: 'https://forums.meteor.com/',
+      title: 'Meteor Forums',
+    },
+    {
+      url: 'https://crater.io/',
+      title: 'Crater.io',
+    },
+  ],
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});

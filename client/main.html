@@ -1,25 +1,28 @@
 <head>
-  <title>meteor-rest-app</title>
+  <meta charset="utf-8" />
+  <title>Bookmarks</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  <div class="container">
+    <h1>Bookmarks</h1>
+    {{> Bookmarks}}
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="Bookmarks">
+  <ul class="list-group">
+    {{#each bookmark in bookmarks}}
+      {{> Bookmark bookmark=bookmark}}
+    {{/each}}
+  </ul>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="Bookmark">
+  <li class="list-group-item">
+    <a href="{{bookmark.url}}" target="_blank">
+      <span class="bookmark-title">{{bookmark.title}}</span>
+      <span class="bookmark-url">{{bookmark.url}}</span>
+    </a>
+  </li>
 </template>
