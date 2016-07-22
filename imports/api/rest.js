@@ -58,6 +58,17 @@ Api.addRoute('bookmarks/:id', {
       };
     },
   },
+  put: {
+    action: function() {
+      const bookmarkId = this.urlParams.id;
+      const { url, title } = this.bodyParams;
+      Bookmarks.update(bookmarkId, { $set: { url, title }});
+      return {
+        status: 'success',
+        data: Bookmarks.findOne(bookmarkId),
+      };
+    },
+  },
 });
 
 export default Api;
