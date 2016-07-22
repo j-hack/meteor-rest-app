@@ -18,12 +18,26 @@ Api.addRoute('hello', {
   },
 });
 
+// GET /api/bookmarks
 Api.addRoute('bookmarks', {
-  get: { // GET /api/bookmarks
+  get: {
     action: function() {
       return {
         status: 'success',
         data: Bookmarks.find().fetch(),
+      };
+    },
+  },
+});
+
+// GET /api/bookmarks/:id
+Api.addRoute('bookmarks/:id', {
+  get: {
+    action: function() {
+      const bookmarkId = this.urlParams.id;
+      return {
+        status: 'success',
+        data: Bookmarks.findOne(bookmarkId),
       };
     },
   },
