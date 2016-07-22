@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import Bookmarks from '../imports/api/bookmarks/bookmarks';
 
+import '../imports/api/rest';
+
 Meteor.startup(() => {
   // 初期データ投入
   if (Bookmarks.find().count() === 0) {
