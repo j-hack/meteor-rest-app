@@ -26,3 +26,19 @@ Template.Bookmarks.onCreated(function() {
 Template.Bookmarks.helpers({
   bookmarks: () => Template.instance().bookmarks.get(),
 });
+
+Template.BookmarkForm.events({
+  'submit .bookmark-form'(event) {
+    event.preventDefault();
+
+    const url = event.target.url.value;
+    const title = event.target.title.value;
+    const callOptions = {data: {url, title}};
+
+    HTTP.post('/api/bookmarks', callOptions, (err, res) => {
+      if (err) { console.log(err); return; }
+      event.target.url.value = "";
+      event.target.title.value = "";
+    });
+  },
+});

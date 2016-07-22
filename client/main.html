@@ -6,6 +6,7 @@
 <body>
   <div class="container">
     <h1>Bookmarks</h1>
+    {{> BookmarkForm}} <!-- 追加 -->
     {{> Bookmarks}}
   </div>
 </body>
@@ -25,4 +26,18 @@
       <span class="bookmark-url">{{bookmark.url}}</span>
     </a>
   </li>
+</template>
+
+<template name="BookmarkForm">
+  <form class="form-inline bookmark-form">
+    <div class="form-group">
+      <label for="url">URL</label>
+      <input type="url" class="form-control" id="url" name="url" placeholder="http://..." />
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" />
+    </div>
+    <button type="submit" class="btn btn-default">Add</button>
+  </form>
 </template>

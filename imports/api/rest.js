@@ -18,8 +18,8 @@ Api.addRoute('hello', {
   },
 });
 
-// GET /api/bookmarks
 Api.addRoute('bookmarks', {
+  // GET /api/bookmarks
   get: {
     action: function() {
       return {
@@ -28,6 +28,7 @@ Api.addRoute('bookmarks', {
       };
     },
   },
+  // POST /api/bookmarks
   post: {
     action: function() {
       const { url, title } = this.bodyParams;
