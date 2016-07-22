@@ -1,4 +1,5 @@
 import { Restivus } from 'meteor/nimble:restivus';
+import Bookmarks from './bookmarks/bookmarks';
 
 const Api = new Restivus({
   prettyJson: true,
@@ -12,6 +13,17 @@ Api.addRoute('hello', {
         data: {
           message: 'Hello, REST API!',
         },
+      };
+    },
+  },
+});
+
+Api.addRoute('bookmarks', {
+  get: { // GET /api/bookmarks
+    action: function() {
+      return {
+        status: 'success',
+        data: Bookmarks.find().fetch(),
       };
     },
   },
