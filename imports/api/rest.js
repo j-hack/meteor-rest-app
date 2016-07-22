@@ -28,6 +28,22 @@ Api.addRoute('bookmarks', {
       };
     },
   },
+  post: {
+    action: function() {
+      const { url, title } = this.bodyParams;
+      const bookmark = {
+        url,
+        title,
+        createdAt: new Date(),
+      };
+      const res = Bookmarks.insert(bookmark);
+
+      return {
+        status: 'success',
+        data: Bookmarks.findOne(res),
+      };
+    },
+  },
 });
 
 // GET /api/bookmarks/:id
