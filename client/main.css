@@ -31,5 +31,10 @@
 }
 
 .bookmark-form {
+  margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.btn-bookmark-edit {
+  margin-top: 5px;
 }

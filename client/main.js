@@ -27,8 +27,29 @@ Template.Bookmarks.helpers({
   bookmarks: () => Template.instance().bookmarks.get(),
 });
 
+Template.Bookmark.onCreated(function() {
+  this.isEditMode = new ReactiveVar(false);
+});
+
+Template.Bookmark.helpers({
+  isEditMode: () => Template.instance().isEditMode.get(),
+  callbacks: () => {
+    const inst = Template.instance();
+    return {
+      onUpdate: () => inst.isEditMode.set(false),
+    };
+  },
+});
+
+Template.Bookmark.events({
+  'click .js-edit-bookmark'(event, inst) {
+    event.preventDefault();
+    inst.isEditMode.set(true);
+  }
+});
+
 Template.BookmarkForm.events({
-  'submit .bookmark-form'(event) {
+  'submit .bookmark-form.is-new'(event) {
     event.preventDefault();
 
     const url = event.target.url.value;
@@ -39,6 +60,19 @@ Template.BookmarkForm.events({
       if (err) { console.log(err); return; }
       event.target.url.value = "";
       event.target.title.value = "";
+    });
+  },
+  'submit .bookmark-form.is-edit'(event, inst) {
+    event.preventDefault();
+
+    const _id = event.target._id.value;
+    const url = event.target.url.value;
+    const title = event.target.title.value;
+    const callOptions = {data: {url, title}};
+
+    HTTP.put(`/api/bookmarks/${_id}`, callOptions, (err, res) => {
+      if (err) { console.log(err); return; }
+      this.callbacks.onUpdate();
     });
   },
 });

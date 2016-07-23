@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <h1>Bookmarks</h1>
-    {{> BookmarkForm}} <!-- 追加 -->
+    {{> BookmarkForm}}
     {{> Bookmarks}}
   </div>
 </body>
@@ -24,20 +24,32 @@
     <a href="{{bookmark.url}}" target="_blank">
       <span class="bookmark-title">{{bookmark.title}}</span>
       <span class="bookmark-url">{{bookmark.url}}</span>
+      {{#unless isEditMode}}
+        <button class="btn btn-xs btn-default btn-bookmark-edit js-edit-bookmark">Edit</button>
+      {{/unless}}
     </a>
+
+    {{#if isEditMode}}
+      {{> BookmarkForm bookmark=bookmark callbacks=callbacks}}
+    {{/if}}
   </li>
 </template>
 
 <template name="BookmarkForm">
-  <form class="form-inline bookmark-form">
+  <form class="form-inline bookmark-form {{#if bookmark}}is-edit{{else}}is-new{{/if}}">
+    {{#if bookmark}}
+      <input type="hidden" name="_id" value="{{bookmark._id}}" />
+    {{/if}}
     <div class="form-group">
       <label for="url">URL</label>
-      <input type="url" class="form-control" id="url" name="url" placeholder="http://..." />
+      <input type="url" class="form-control" id="url" name="url" placeholder="http://..." value="{{bookmark.url}}"/>
     </div>
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" />
+      <input type="text" class="form-control" id="title" name="title" value="{{bookmark.title}}" />
     </div>
-    <button type="submit" class="btn btn-default">Add</button>
+    <button type="submit" class="btn btn-default">
+      {{#if bookmark}}Update{{else}}Add{{/if}}
+    </button>
   </form>
 </template>
