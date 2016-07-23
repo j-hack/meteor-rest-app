@@ -45,7 +45,18 @@ Template.Bookmark.events({
   'click .js-edit-bookmark'(event, inst) {
     event.preventDefault();
     inst.isEditMode.set(true);
-  }
+  },
+  'click .js-delete-bookmark'(event, inst) {
+    event.preventDefault();
+    const bookmarkId = this.bookmark._id;
+
+    const result = confirm("Are you sure?");
+    if (!result) { return; }
+    
+    HTTP.del(`/api/bookmarks/${bookmarkId}`, (err, res) => {
+      if (err) { console.log(err); return; }
+    });
+  },
 });
 
 Template.BookmarkForm.events({

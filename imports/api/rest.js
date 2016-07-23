@@ -47,8 +47,8 @@ Api.addRoute('bookmarks', {
   },
 });
 
-// GET /api/bookmarks/:id
 Api.addRoute('bookmarks/:id', {
+  // GET /api/bookmarks/:id
   get: {
     action: function() {
       const bookmarkId = this.urlParams.id;
@@ -58,6 +58,7 @@ Api.addRoute('bookmarks/:id', {
       };
     },
   },
+  // PUT /api/bookmarks/:id
   put: {
     action: function() {
       const bookmarkId = this.urlParams.id;
@@ -69,6 +70,7 @@ Api.addRoute('bookmarks/:id', {
       };
     },
   },
+  // DELETE /api/bookmarks/:id
   delete: {
     action: function() {
       const bookmarkId = this.urlParams.id;
