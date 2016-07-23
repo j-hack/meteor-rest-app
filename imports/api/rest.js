@@ -69,6 +69,16 @@ Api.addRoute('bookmarks/:id', {
       };
     },
   },
+  delete: {
+    action: function() {
+      const bookmarkId = this.urlParams.id;
+      Bookmarks.remove(bookmarkId);
+      this.statusCode = 204;
+      return {
+        status: 'No Content',
+      };
+    },
+  },
 });
 
 export default Api;
